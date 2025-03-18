@@ -6,7 +6,7 @@ if __name__ == '__main__':
     index_name = 'drugbank-no-tags'
     es = ElasticSearch(index_name=index_name)
 
-    response = es.query_index('<description>')
+    response = es.query_index('conjug consist of human')
     resp = response['hits']['hits']
 
     for hit in resp:
