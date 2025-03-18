@@ -21,7 +21,7 @@ if __name__ == '__main__':
     data_dir = f'drugbank/clean'
 
     # initialize ES handler
-    index_name = 'drugbank-no-html'
+    index_name = 'drugbank-no-tags'
     es = ElasticSearch(index_name=index_name)
 
     # index specifications
@@ -32,7 +32,14 @@ if __name__ == '__main__':
                     "type":"custom",
                     "tokenizer":"standard",
                     "filter":["lowercase"],
-                    "char_filter":["html_strip"]
+                    "char_filter":["strip_tags"]
+                }
+            },
+            "char_filter":{
+                "strip_tags":{
+                    "type": "pattern_replace",
+                    "pattern":"<[^>]*>",
+                    "replacement": ""
                 }
             }
         }
